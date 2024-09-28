@@ -2,6 +2,7 @@
 import express from 'express';  //imports express library for use of'import'
 import connectDatabase from './config/db'; //imports function
 import { check, validationResult } from 'express-validator';
+import cors from 'cors';
 
 
 //create express object
@@ -12,6 +13,7 @@ connectDatabase();
 
 //configure middleware, necessary for converting json to js
 app.use(express.json({ extended: false }));
+app.use(cors({ origin: 'http://localhost:3000'}));
 
 // API Endpoints
 /**
@@ -47,4 +49,5 @@ app.post('/api/users',
 );
 
 //Connection listener
-app.listen(3000, () => console.log('Express server running on port 3000'));
+const port = 5000;
+app.listen(port, () => console.log('Express server running on port ${port}'));
