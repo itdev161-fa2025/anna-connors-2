@@ -1,15 +1,33 @@
-//import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        GoodThings
-      </header>
-    </div>
-  );
-}
+class App extends React.Component {
+  state = { data: null }
 
-export default App;
+
+  componentDidMount() {
+    axios.get('http://localhost:5000')
+      .then((response) => {
+        this.setState({
+          data: response.data
+        })
+      })
+      .catch((error) => {
+        console.error(`Error fetching data: ${error}`);
+      })
+  };
+
+    render() {
+      return (
+        <div className="App">
+          <header className="App-header">
+            GoodThings
+          </header>
+          {this.state.data}
+        </div>
+        );
+      }
+    }
+    
+  export default App;
