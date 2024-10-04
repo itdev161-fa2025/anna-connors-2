@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://PeterCottontail:hoppityhop@cluster0.mnlxt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    "mongoURI": "mongodb+srv://PeterCottontail:hoppityhop@cluster0.mnlxt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    "jwtSecret": "ihatethisproject"
 }
