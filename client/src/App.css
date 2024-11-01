@@ -24,7 +24,7 @@
   color: white;
   padding-left: 30px;
 }
-/*
+
 .App-header ul {
   list-style-type: none;
   flex: 1;
@@ -43,14 +43,14 @@
   color: #fff;
   text-decoration: none;
 }
-*/
+
 .App-link {
   color: #61dafb;
 }
 
-/*main {
+main {
   margin: 30px auto;
-}*/
+}
 
 @keyframes App-logo-spin {
   from {
