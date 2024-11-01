@@ -102,7 +102,7 @@ app.get('/api/auth', auth, async (req, res) => {
  */
 
 app.post(
-    '/api/login'
+    '/api/login',
     [
         check('email', 'Plese enter a valid email').isEmail(),
         check('password', 'A password is required').exists()
@@ -142,7 +142,7 @@ app.post(
 const returnToken = (user, res) => {
     const payload = {
         user: {
-            is: user.id
+            id: user.id
         }
     };
 
