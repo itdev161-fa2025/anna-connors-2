@@ -1,6 +1,10 @@
 import './App.css';
 import React from 'react';
 import axios from 'axios';
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 class App extends React.Component {
   state = { data: null }
@@ -22,11 +26,22 @@ class App extends React.Component {
       return (
         <div className="App">
           <header className="App-header">
-            GoodThings
+            <h1>GoodThings</h1>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/register">Register</Link></li>
+              <li><Link to="/login">Login</Link></li>
+            </ul>
           </header>
-          {this.state.data}
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </main>
         </div>
-        );
+        )
       }
     }
     
