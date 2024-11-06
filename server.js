@@ -8,6 +8,7 @@ import bcrypt from 'bcryptjs'; //as User does
 import jwt from 'jsonwebtoken';
 import config from 'config';
 import auth from './middleware/auth';
+import Post from './models/Post';
 
 
 //create express object
@@ -138,6 +139,49 @@ app.post(
         }
     }
 );
+
+/**
+ * @route POST api/posts
+ * @desc Create post
+ */
+
+app.post(
+    '/api/posts',
+    [
+        auth,
+        [
+            check('title', 'Title text is required').not().isEmpty(),
+            check('body', 'Body text is required').not().isEmpty()
+        ]
+    ],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({ errors: errors.array() });
+        } else {
+            const { title, body } = req.body;
+            try {
+                //get the user who created the post
+                const user = await User.dinwsById(req.user.id);
+
+                //Create a new post
+                const post = new Post({
+                    user: user.id,
+                    title: title,
+                    body: body
+                });
+
+                //Save to the db and return
+                await post.save();
+
+                res.json(post);
+            } catch (error) {
+                console.error(error);
+                res.status(500).send('Server error');
+            }
+        }
+    }
+)
 
 const returnToken = (user, res) => {
     const payload = {
