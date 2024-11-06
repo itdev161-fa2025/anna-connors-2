@@ -162,7 +162,7 @@ app.post(
             const { title, body } = req.body;
             try {
                 //get the user who created the post
-                const user = await User.dinwsById(req.user.id);
+                const user = await User.findById(req.user.id);
 
                 //Create a new post
                 const post = new Post({
@@ -182,6 +182,22 @@ app.post(
         }
     }
 )
+
+/**
+ * @route GET api/posts
+ * @desc Get posts
+ */
+app.get('/api/posts', auth, async (req, res) => {
+    try {
+        const posts = await Post.find().sort({ date: -1 });
+
+        res.json(posts);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
 
 const returnToken = (user, res) => {
     const payload = {
